@@ -231,7 +231,7 @@ else
     echo "   2. Click 'New SSH key'"
     echo "   3. Paste the key and save"
     open -a "Google Chrome" "https://github.com/settings/keys" 2>/dev/null || open "https://github.com/settings/keys"
-    read -p "Press Enter when you've added the key to GitHub..."
+    read -p "Press Enter when you've added the key to GitHub..." </dev/tty
 fi
 
 # ========================================
@@ -263,7 +263,7 @@ else
     echo "   2. Click 'Add key'"
     echo "   3. Paste the key and save"
     open -a "Safari" "https://bitbucket.org/account/settings/ssh-keys/" 2>/dev/null || open "https://bitbucket.org/account/settings/ssh-keys/"
-    read -p "Press Enter when you've added the key to Bitbucket..."
+    read -p "Press Enter when you've added the key to Bitbucket..." </dev/tty
 fi
 
 # ========================================
@@ -347,8 +347,8 @@ if [ -z "$PERSONAL_NAME" ]; then
     PERSONAL_EMAIL=$(git config --file ~/.gitconfig-personal user.email 2>/dev/null || echo "")
     
     if [ -z "$PERSONAL_NAME" ]; then
-        read -p "👤 Enter your PERSONAL name: " PERSONAL_NAME
-        read -p "📧 Enter your PERSONAL email: " PERSONAL_EMAIL
+        read -p "👤 Enter your PERSONAL name: " PERSONAL_NAME </dev/tty
+        read -p "📧 Enter your PERSONAL email: " PERSONAL_EMAIL </dev/tty
     fi
 fi
 
@@ -357,8 +357,8 @@ if [ -z "$WORK_NAME" ]; then
     WORK_EMAIL=$(git config --file ~/.gitconfig-work user.email 2>/dev/null || echo "")
     
     if [ -z "$WORK_NAME" ]; then
-        read -p "👤 Enter your WORK name: " WORK_NAME
-        read -p "📧 Enter your WORK email: " WORK_EMAIL
+        read -p "👤 Enter your WORK name: " WORK_NAME </dev/tty
+        read -p "📧 Enter your WORK email: " WORK_EMAIL </dev/tty
     fi
 fi
 
@@ -533,7 +533,7 @@ else
     echo "   → Click 'iCloud Drive' options"
     echo "   → Enable 'Desktop & Documents Folders'"
     open "x-apple.systempreferences:com.apple.preferences.AppleIDPrefPane?iCloud"
-    read -p "Press Enter when you've done with the changes..."
+    read -p "Press Enter when you've done with the changes..." </dev/tty
 fi
 
 
@@ -590,13 +590,13 @@ killall Dock 2>/dev/null || true
 echo -e "\n4. 📝 Configuring MenuBar..."
 echo "   ⚠️  Note: Apple removed automation support for Control Center items in macOS Monterey+"
 echo "   📝 Please manually enable these in Control Center settings:"
-echo "      • WiFi - Show in Menu Bar"
-echo "      • Bluetooth - Show in Menu Bar"
 echo "      • Battery - Show in Menu Bar (with percentage)"
+echo "      • Bluetooth - Show in Menu Bar"
+echo "      • WiFi - Show in Menu Bar"
 echo ""
 echo "   Opening Control Center settings..."
 open "x-apple.systempreferences:com.apple.ControlCenter-Settings.extension"
-read -p "Press Enter when you've configured MenuBar items..."
+read -p "Press Enter when you've configured MenuBar items..." </dev/tty
 
 
 echo ""
