@@ -5,7 +5,7 @@ set -e
 
 # Check if running in interactive mode and warn about sudo requirements
 echo "--------------------------------------------"
-echo "🔧 CLI Tools Setup for macOS"
+echo "🔧 CLI Tools Setup for MacOS"
 echo "--------------------------------------------"
 echo "⚠️  This script requires administrator access."
 echo "💡 You may be prompted for your password during installation."
@@ -31,7 +31,9 @@ cleanup() {
 }
 trap cleanup EXIT
 
-echo -e "\n--------------------------------------------"
+
+echo ""
+echo "--------------------------------------------"
 echo "Setting up Oh My Zsh"
 echo "--------------------------------------------"
 
@@ -44,7 +46,8 @@ else
 fi
 
 
-echo -e "\n--------------------------------------------"
+echo ""
+echo "--------------------------------------------"
 echo "Setting up Homebrew (Package Manager)"
 echo "--------------------------------------------"
 
@@ -73,41 +76,45 @@ else
 fi
 
 
-echo -e "\n--------------------------------------------"
-echo "Setting up Git"
+echo ""
+echo "--------------------------------------------"
+echo "Setting up CLI tools via Homebrew"
 echo "--------------------------------------------"
 
-if command -v git &>/dev/null; then
-    echo "✅ Git is already installed"
-    echo "   Current version: $(git --version)"
-else
-    echo "📦 Installing Git..."
-    if brew install git; then
-        echo "✅ Git installed successfully!"
-        echo "   Version: $(git --version)"
+# Array of CLI tools to install & manage via Homebrew
+declare -a cli_tools=(
+    "git"
+    "nvm"
+    "awscli"
+    "mysides"
+    "dockutil"
+    "mas"
+)
+
+for tool in "${cli_tools[@]}"; do
+    # Convert tool name to a more readable format for display
+    tool_display=$(echo "$tool" | sed 's/-/ /g' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2)}1')
+
+    if ! brew list "$tool" &>/dev/null; then
+        echo "📦 Installing $tool_display..."
+        if brew install "$tool"; then
+            echo "✅ $tool_display installed successfully!"
+        else
+            echo "⚠️  Warning: Failed to install $tool_display, continuing anyway..."
+        fi
     else
-        echo "❌ Failed to install Git"
-        exit 1
+        echo "✅ $tool_display is already installed, skipping..."
     fi
-fi
+
+    echo "   $tool_display installed version: $(brew list "$tool" --versions)" || echo "   $tool_display version: Not available"
+    echo ""
+done
 
 
-echo -e "\n--------------------------------------------"
+echo ""
+echo "--------------------------------------------"
 echo "Setting up Node.js (LTS version)"
 echo "--------------------------------------------"
-
-# Setup NVM (Node Version Manager)
-if brew list nvm &>/dev/null; then
-    echo "✅ nvm is already installed, skipping..."
-else
-    echo "📦 Installing nvm..."
-    if brew install nvm; then
-        echo "✅ nvm installed successfully!"
-    else
-        echo "❌ Failed to install nvm"
-        exit 1
-    fi
-fi
 
 # Setup NVM environment
 export NVM_DIR="$HOME/.nvm"
@@ -137,26 +144,8 @@ else
 fi
 
 
-echo -e "\n--------------------------------------------"
-echo "Setting up AWS CLI"
+echo ""
 echo "--------------------------------------------"
-
-if command -v aws &>/dev/null; then
-    echo "✅ AWS CLI is already installed, skipping..."
-    echo "   Current version: $(aws --version)"
-else
-    echo "📦 Installing AWS CLI..."
-    if brew install awscli; then
-        echo "✅ AWS CLI installed successfully!"
-        echo "   Version: $(aws --version)"
-    else
-        echo "❌ Failed to install AWS CLI"
-        exit 1
-    fi
-fi
-
-
-echo -e "\n--------------------------------------------"
 echo "Setting up stskeygen (AWS STS key generator)"
 echo "--------------------------------------------"
 
@@ -177,40 +166,6 @@ else
         echo "✅ stskeygen installed successfully!"
     else
         echo "❌ Failed to install stskeygen"
-        exit 1
-    fi
-fi
-
-
-echo -e "\n--------------------------------------------"
-echo "Setting up mysides (Finder sidebar manager)"
-echo "--------------------------------------------"
-
-if command -v mysides &>/dev/null; then
-    echo "✅ mysides is already installed, skipping..."
-else
-    echo "📦 Installing mysides..."
-    if brew install mysides; then
-        echo "✅ mysides installed successfully!"
-    else
-        echo "❌ Failed to install mysides"
-        exit 1
-    fi
-fi
-
-
-echo -e "\n--------------------------------------------"
-echo "Setting up dockutil (Dock manager)"
-echo "--------------------------------------------"
-
-if command -v dockutil &>/dev/null; then
-    echo "✅ dockutil is already installed, skipping..."
-else
-    echo "📦 Installing dockutil..."
-    if brew install dockutil; then
-        echo "✅ dockutil installed successfully!"
-    else
-        echo "❌ Failed to install dockutil"
         exit 1
     fi
 fi
