@@ -55,11 +55,12 @@ echo ""
 
 # Array of App Store apps (Display Name and App Store ID)
 # Format: "Display Name:App Store ID"
-declare -a app_store_apps=(
-    "Slack:803453959"
-    "OneDrive:823766827"
-    "Keeper Password Manager:414781829"
-)
+# declare -a app_store_apps=(
+#     "Slack:803453959"
+#     "OneDrive:823766827"
+#     "Keeper Password Manager:414781829"
+# )
+declare -a app_store_apps=()
 
 for app_entry in "${app_store_apps[@]}"; do
     IFS=':' read -r app_display app_id <<< "$app_entry"
@@ -85,21 +86,18 @@ echo "Setting up GUI applications via Homebrew Cask"
 echo "--------------------------------------------"
 
 # Array of GUI applications to install & manage via Homebrew Cask
-# Note: microsoft-outlook sometimes fails on MacOS
-# declare -a brew_cask_apps=(
-#     "google-chrome"
-#     "postman"
-#     "microsoft-teams"
-#     "microsoft-outlook"
-#     "adobe-creative-cloud"
-#     "cursor"
-#     "visual-studio-code"
-# )
+# ⚠️ Note: microsoft-outlook fails to open on MacOS
 declare -a brew_cask_apps=(
+    "google-chrome"
     "postman"
     "microsoft-teams"
     "microsoft-outlook"
     "adobe-creative-cloud"
+    "cursor"
+    "visual-studio-code"
+    "slack"
+    "onedrive"
+    "keeper-password-manager"
 )
 
 echo "📦 Installing GUI applications via Homebrew Cask..."
