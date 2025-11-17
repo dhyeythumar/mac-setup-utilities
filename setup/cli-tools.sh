@@ -9,7 +9,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Download common.sh if not found (for curl | bash usage)
 if [ ! -f "${SCRIPT_DIR}/common.sh" ]; then
     echo "📥 Downloading common utilities..."
-    curl -fsSL https://raw.githubusercontent.com/dhyeythumar/mac-utilities/refs/heads/main/scripts/common.sh -o "${SCRIPT_DIR}/common.sh"
+    curl -fsSL https://raw.githubusercontent.com/dhyeythumar/mac-utilities/refs/heads/main/setup/common.sh -o "${SCRIPT_DIR}/common.sh"
 fi
 
 # Source common utilities

@@ -26,7 +26,7 @@ section_header "Setting up App Store applications" \
 # Check if mas is installed
 if ! command -v mas &>/dev/null; then
     error_exit "mas (Mac App Store CLI) is not installed" \
-        "Please run cli-tools.setup.sh first to install mas"
+        "Please run cli-tools.sh first to install mas"
 fi
 
 # Note: mas account command is not supported on newer macOS versions

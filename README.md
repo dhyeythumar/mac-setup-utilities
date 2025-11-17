@@ -2,7 +2,7 @@
 
 Opinionated scripts to setup and configure a new MacBook with developer tools and personalized settings.
 
-## Quick Setup Guide
+## Quick Guide
 
 **Steps for MacBook Setup & Configuration**
 
@@ -13,13 +13,13 @@ Opinionated scripts to setup and configure a new MacBook with developer tools an
 -   Step 2. CLI tools setup:
 
     ```bash
-    curl -fsSL https://raw.githubusercontent.com/dhyeythumar/mac-utilities/refs/heads/main/scripts/cli-tools.setup.sh | bash
+    curl -fsSL https://raw.githubusercontent.com/dhyeythumar/mac-utilities/refs/heads/main/setup/cli-tools.sh | bash
     ```
 
 -   Step 3: Apps setup (download & install):
 
     ```bash
-    curl -fsSL https://raw.githubusercontent.com/dhyeythumar/mac-utilities/refs/heads/main/scripts/apps.setup.sh | bash
+    curl -fsSL https://raw.githubusercontent.com/dhyeythumar/mac-utilities/refs/heads/main/setup/apps.sh | bash
     ```
 
 -   Step 4: `Manual process` Log into OneDrive, Bitbucket & GitHub (for SSH setup).
@@ -27,7 +27,7 @@ Opinionated scripts to setup and configure a new MacBook with developer tools an
 -   Step 5. MacBook customisations (such as Terminal app, Finder app, etc)
 
     ```bash
-    curl -fsSL https://raw.githubusercontent.com/dhyeythumar/mac-utilities/refs/heads/main/scripts/customisation.sh | bash
+    curl -fsSL https://raw.githubusercontent.com/dhyeythumar/mac-utilities/refs/heads/main/setup/customisation.sh | bash
     ```
 
 -   Step 6: `Manual process` Individual app configuration (such as login).
@@ -42,7 +42,7 @@ Opinionated scripts to setup and configure a new MacBook with developer tools an
 
 ## 📦 What Gets Installed
 
-### `cli-tools.setup.sh`
+### `setup/cli-tools.sh`
 
 -   **Xcode Command Line Tools** - Required for Git and compilation
 -   **Oh My Zsh** - Enhanced Zsh framework
@@ -57,7 +57,7 @@ Opinionated scripts to setup and configure a new MacBook with developer tools an
     -   `netcat` - Network utility
     -   `stskeygen` - AWS STS key generator (custom tap)
 
-### `apps.setup.sh`
+### `setup/apps.sh`
 
 -   **Google Chrome** - Web browser
 -   **Postman** - API development tool
@@ -68,7 +68,7 @@ Opinionated scripts to setup and configure a new MacBook with developer tools an
 -   **Slack** - Team communication
 -   **OneDrive** - Cloud storage
 
-### `customisation.sh`
+### `setup/customisation.sh`
 
 -   **Terminal**
     -   Monokai Pro (Filter Spectrum) theme
@@ -163,7 +163,7 @@ ssh -T git@bitbucket.org
 
 ## 🛠️ Script Architecture
 
-All scripts use shared utilities from `scripts/common.sh` which provides:
+All scripts use shared utilities from `setup/common.sh` which provides:
 
 -   **Color-coded output functions**: `success()`, `warning()`, `error()`, `info()`, `action()`
 -   **Section headers**: `section_header()`, `script_notification()`
@@ -185,7 +185,7 @@ All scripts use shared utilities from `scripts/common.sh` which provides:
 
 Feel free to fork and customize for your own setup! The modular structure makes it easy to:
 
--   Add/remove applications in the `apps.setup.sh` arrays
+-   Add/remove applications in the `apps.sh` arrays
 -   Customize aliases in `customisation.sh`
 -   Modify system settings to your preference
 -   Extend `common.sh` with your own utility functions
